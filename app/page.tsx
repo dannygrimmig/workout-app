@@ -1,19 +1,16 @@
-import { HistoryGridItem } from "./ui/Dashboard/HistoryGridItem";
-import { Wallet } from "./ui/Dashboard/Wallet";
 import { NewWorkout } from "./ui/Dashboard/NewWorkout";
 
 export default function Home() {
   return (
     <main className="w-full min-h-[calc(100vh-74px)] grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 p-8">
-      <GridItem link="history" className="md:col-span-2 md:row-span-2">
-        <HistoryGridItem />
-      </GridItem>
+      <GridItem
+        link="history"
+        className="md:col-span-2 md:row-span-2"
+      ></GridItem>
       <GridItem link="add">
         <NewWorkout />
       </GridItem>
-      <GridItem link="profile">
-        <Wallet />
-      </GridItem>
+      <GridItem link="profile"></GridItem>
     </main>
   );
 }
