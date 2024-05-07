@@ -1,8 +1,7 @@
 "use client";
 import * as React from "react";
 
-const Date_Options = ["1W", "1M", "6M", "1Y"] as const;
-type Date_Type = (typeof Date_Options)[number];
+const Date_Options = ["1W", "1M", "6M", "1Y"];
 
 const WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MONTH = ["4/1", "4/8", "4/15", "4/22", "4/29"];
@@ -21,7 +20,7 @@ const YEAR = [
   "Dec",
 ];
 
-const DateMap: Record<Date_Type, string[]> = {
+const DateMap: Record<string, string[]> = {
   "1W": WEEK,
   "1M": MONTH,
   "6M": YEAR.slice(6),
@@ -29,7 +28,7 @@ const DateMap: Record<Date_Type, string[]> = {
 };
 
 export function HistoryGridItem() {
-  const [currentDate, setCurrentDate] = React.useState<Date_Type>("1W");
+  const [currentDate, setCurrentDate] = React.useState<string>("1W");
 
   return (
     <div className="flex flex-col justify-between w-full h-full">
