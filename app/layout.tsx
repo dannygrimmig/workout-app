@@ -4,7 +4,7 @@ import "./globals.css";
 import { NavBar } from "./ui/nav";
 
 const kanit = Kanit({
-  weight: "200",
+  weight: ["200", "400", "600"],
   subsets: ["latin"],
 });
 
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${kanit.className} bg-slate-100`}>
+      <body className={`${kanit.className} bg-slate-100 font-light`}>
         <NavBar />
         {children}
       </body>

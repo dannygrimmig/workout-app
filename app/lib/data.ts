@@ -1,6 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore } from "next/cache";
-import { User, Workout, Workout_Exercise } from "./definitions";
+import { Exercise, Set, User, Workout, Workout_Exercise } from "./definitions";
 
 export async function fetchUsers() {
   // Add noStore() here to prevent the response from being cached.
@@ -45,6 +45,35 @@ export async function fetchWorkoutExercises(workoutId: number) {
         WHERE 
             workout_id = ${workoutId}
         `;
+
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch revenue data.");
+  }
+}
+
+export async function fetchSets(workoutExerciseId: number) {
+  unstable_noStore();
+
+  try {
+    const data = await sql<Set>`
+        SELECT * 
+        FROM sets 
+        WHERE 
+            workout_exercise_id = ${workoutExerciseId}
+        `;
+
+    return data.rows;
+  } catch (error) {
+    console.error("Database Error:", error);
+    throw new Error("Failed to fetch revenue data.");
+  }
+}
+
+export async function fetchExercises() {
+  try {
+    const data = await sql<Exercise>`SELECT * FROM exercises`;
 
     return data.rows;
   } catch (error) {

@@ -18,7 +18,7 @@ export function NavBar() {
 
       <Link
         href={"/signup"}
-        className="py-1 px-4 border-2 border-black rounded-full"
+        className="py-1 px-4 border border-black rounded-full"
       >
         coming soon
       </Link>
