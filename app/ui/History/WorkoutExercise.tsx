@@ -13,21 +13,25 @@ export async function WorkoutExercise(workoutExercise: Workout_Exercise) {
   return (
     <div>
       <div className="flex gap-2">
-        <p className=" font-normal">{currentExercise?.name}</p>
+        <p className="font-normal">{currentExercise?.name}</p>
       </div>
 
-      <div>
-        {!!sets && (
-          <ul>
-            {sets.map((set) => (
-              <li key={set.id} className="flex gap-2">
-                <p>reps: {set.reps}</p>
-                <p>weight: {set.weight}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th className="font-light pr-2">reps</th>
+            <th className="font-light">weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sets.map((set) => (
+            <tr key={set.id}>
+              <td>{set.reps}</td>
+              <td>{set.weight}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

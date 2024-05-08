@@ -20,7 +20,6 @@ export type Workout_Exercise = {
   id: number;
   workout_id: number;
   exercise_id: number;
-  sets: number;
 };
 
 export type Set = {

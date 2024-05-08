@@ -13,7 +13,7 @@ export async function fetchUsers() {
     return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch revenue data.");
+    throw new Error("Failed to fetch users");
   }
 }
 
@@ -31,7 +31,7 @@ export async function fetchUserWorkouts(userId: number) {
     return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch revenue data.");
+    throw new Error("Failed to fetch user workouts");
   }
 }
 
@@ -49,7 +49,7 @@ export async function fetchWorkoutExercises(workoutId: number) {
     return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch revenue data.");
+    throw new Error("Failed to fetch workout exercises");
   }
 }
 
@@ -67,7 +67,7 @@ export async function fetchSets(workoutExerciseId: number) {
     return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch revenue data.");
+    throw new Error("Failed to fetch sets");
   }
 }
 
@@ -78,6 +78,6 @@ export async function fetchExercises() {
     return data.rows;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch revenue data.");
+    throw new Error("Failed to fetch exercises");
   }
 }
