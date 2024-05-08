@@ -1,3 +1,4 @@
+import { CURRENT_USER } from "./lib/constants";
 import { NewWorkout } from "./ui/Dashboard/NewWorkout";
 
 export default function Home() {
@@ -8,9 +9,15 @@ export default function Home() {
         className="md:col-span-2 md:row-span-2"
       ></GridItem>
       <GridItem link="add">
+        <div>
+          <p>id: {CURRENT_USER.id}</p>
+          <p>name: {CURRENT_USER.name}</p>
+          <p>email: {CURRENT_USER.email}</p>
+        </div>
+      </GridItem>
+      <GridItem link="profile">
         <NewWorkout />
       </GridItem>
-      <GridItem link="profile"></GridItem>
     </main>
   );
 }
@@ -20,6 +27,7 @@ type GridItem = {
   className?: string;
   children?: React.ReactNode;
 };
+
 function GridItem(props: GridItem) {
   const { link, className, children } = props;
   return (
