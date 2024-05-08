@@ -9,7 +9,7 @@ export async function WorkoutCard(workout: Workout) {
   return (
     <button
       type="button"
-      className="border p-4 shadow-lg shadow-slate-300 h-max"
+      className="border p-4 shadow-lg shadow-slate-300 h-max text-left"
     >
       <h1 className="font-bold">Workout: {workout.id}</h1>
       <p>{workout.notes}</p>

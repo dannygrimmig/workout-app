@@ -5,6 +5,7 @@ import { NavBar } from "./ui/nav";
 
 const kanit = Kanit({
   weight: ["200", "400", "600"],
+  style: ["normal"],
   subsets: ["latin"],
 });
 
