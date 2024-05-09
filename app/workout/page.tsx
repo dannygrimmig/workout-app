@@ -11,7 +11,7 @@ export default async function Page() {
   // derived
 
   return (
-    <div className="w-full min-h-[calc(100vh-74px)] p-8">
+    <div className="w-full min-h-[calc(100vh-74px)] p-4 sm:p-8">
       <LogWorkout exercises={exercises} />
     </div>
   );

@@ -25,23 +25,42 @@ export function LogWorkout(props: LogWorkoutProps) {
 
   return (
     <div>
+      <h1 className="font-bold text-4xl mb-4">Log Workout</h1>
       <div className="flex gap-4 mb-4 items-end">
-        <input className="font-bold text-4xl" id="date" type="date" />
+        <input
+          className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
+          id="date"
+          name="date"
+          type="date"
+        />
 
-        <input type="text" placeholder="notes..." id="notes" />
+        <input
+          className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
+          type="text"
+          placeholder="notes"
+          id="notes"
+          name="notes"
+        />
 
-        <input type="time" />
-
-        <p>duration</p>
+        <input
+          className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
+          type="time"
+          id="time"
+          name="time"
+        />
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
         {workoutExercises.map((workoutExercise) => (
-          <WorkoutExercise key={workoutExercise.id} {...workoutExercise} />
+          <WorkoutExercise
+            key={workoutExercise.id}
+            exercises={exercises}
+            workoutExercise={workoutExercise}
+          />
         ))}
         <button
           onClick={addWorkoutExercise}
-          className="bg-sky-200 p-2 border border-black h-max"
+          className="bg-sky-200 p-2 shadow-[4px_4px] shadow-black border border-black h-max"
         >
           Add Workout Exercise
         </button>
@@ -50,7 +69,15 @@ export function LogWorkout(props: LogWorkoutProps) {
   );
 }
 
-function WorkoutExercise(workoutExercise: Workout_Exercise) {
+type WorkoutExerciseProps = {
+  exercises: Exercise[];
+  workoutExercise: Workout_Exercise;
+};
+
+function WorkoutExercise(props: WorkoutExerciseProps) {
+  // imported
+  const { exercises, workoutExercise } = props;
+
   // managed
   const [sets, setSets] = React.useState<Set[]>([]);
 
@@ -58,7 +85,7 @@ function WorkoutExercise(workoutExercise: Workout_Exercise) {
     setSets([
       ...sets,
       {
-        id: 0,
+        id: sets.length + 1,
         order_index: 1,
         reps: 10,
         workout_exercise_id: workoutExercise.id,
@@ -67,18 +94,41 @@ function WorkoutExercise(workoutExercise: Workout_Exercise) {
     ]);
   };
   return (
-    <div className="border p-4 shadow-lg shadow-slate-300 h-max">
-      <h2>Workout Exercise: {workoutExercise.exercise_id}</h2>
+    <div className="p-4 shadow-[4px_4px] shadow-black border border-black h-max">
+      <h2 className="font-bold text-lg">
+        <select
+          id="exercise"
+          name="exercise"
+          className="border-0 bg-transparent"
+        >
+          <option value="">Select Workout</option>
+          {exercises?.map((exercise: Exercise) => (
+            <option key={exercise.id} value={exercise.id}>
+              {exercise.name}
+            </option>
+          ))}
+        </select>
+      </h2>
 
-      <div className="flex flex-col gap-4 mb-2">
-        {sets.map((set) => (
-          <WorkoutSet key={set.id} {...set} />
-        ))}
-      </div>
+      <table className=" w-full table-fixed mb-2">
+        <thead>
+          <tr className="text-left">
+            <th className="font-normal">id</th>
+            <th className="font-normal">weight</th>
+            <th className="font-normal">reps</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {sets.map((set) => (
+            <WorkoutSet key={set.id} {...set} />
+          ))}
+        </tbody>
+      </table>
 
       <button
         onClick={addWorkoutExercise}
-        className="bg-sky-600 border border-black p-1"
+        className="bg-sky-600 shadow-[4px_4px] shadow-black border border-black p-1 self-end"
       >
         Add Set
       </button>
@@ -87,11 +137,16 @@ function WorkoutExercise(workoutExercise: Workout_Exercise) {
 }
 
 function WorkoutSet(set: Set) {
+  const isGray = set.id % 2 != 0;
   return (
-    <div className="flex gap-2">
-      <p>id: {set.id}</p>
-      <p>weight: {set.weight}</p>
-      <p>reps: {set.reps}</p>
-    </div>
+    <tr>
+      <td className={`${isGray && "bg-slate-200"}`}>{set.id}</td>
+      <td className={`${isGray && "bg-slate-200"}`}>
+        <input className="w-full bg-inherit" type="number" value={set.weight} />
+      </td>
+      <td className={`${isGray && "bg-slate-200"}`}>
+        <input className="w-full bg-inherit" type="number" value={set.reps} />
+      </td>
+    </tr>
   );
 }

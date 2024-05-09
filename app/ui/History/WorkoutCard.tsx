@@ -1,6 +1,5 @@
 import { fetchWorkoutExercises } from "@/app/lib/data";
 import { Workout, Workout_Exercise } from "@/app/lib/definitions";
-import { formatDuration } from "@/app/lib/helpers";
 import { WorkoutExercise } from "./WorkoutExercise";
 
 export async function WorkoutCard(workout: Workout) {
@@ -12,10 +11,9 @@ export async function WorkoutCard(workout: Workout) {
       className="border p-4 shadow-lg shadow-slate-300 h-max text-left"
     >
       <h1 className="font-bold">{workout.date.toDateString()}</h1>
-      <p>{workout.notes}</p>
       <div className="flex gap-4">
+        <p>{workout.notes}</p>
         <p>{workout.time.toString()}</p>
-        <p>{formatDuration(workout.duration)}</p>
       </div>
 
       <div className="mt-4">
