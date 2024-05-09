@@ -1,7 +1,28 @@
 "use client";
 import * as React from "react";
 
-import { Exercise, Set, Workout_Exercise } from "@/app/lib/definitions";
+import {
+  Exercise,
+  Set,
+  Workout,
+  Workout_Exercise,
+} from "@/app/lib/definitions";
+import { CURRENT_USER } from "@/app/lib/constants";
+import { WorkoutDetails } from "./WorkoutDetails";
+import { WorkoutExerciseGrid } from "./WorkoutExerciseGrid";
+import { createWorkout } from "@/app/lib/actions";
+
+const WORKOUT_ID = 1;
+const EMPTY_WORKOUT = {
+  id: WORKOUT_ID,
+  date: new Date(),
+  notes: "",
+  time: 0,
+  user_id: CURRENT_USER.id,
+};
+
+let WORKOUT_EXERCISE_ID_COUNT = 0;
+let SET_ID_COUNT = 0;
 
 type LogWorkoutProps = {
   exercises: Exercise[];
@@ -12,19 +33,54 @@ export function LogWorkout(props: LogWorkoutProps) {
   const { exercises } = props;
 
   // managed
+  const [workout, setWorkout] = React.useState<Workout>(EMPTY_WORKOUT);
+
   const [workoutExercises, setWorkoutExercises] = React.useState<
     Workout_Exercise[]
   >([]);
 
-  // add workout exercise to workout
+  const [sets, setSets] = React.useState<Set[]>([]);
+
+  const [success, setSuccess] = React.useState(false);
+  const [error, setError] = React.useState(false);
+
+  const handleCreateWorkout = async () => {
+    try {
+      await createWorkout(workout, workoutExercises, sets);
+
+      // If successful
+      setWorkout(EMPTY_WORKOUT);
+      setWorkoutExercises([]);
+      setSets([]);
+      setSuccess(true);
+      setError(false);
+    } catch (error) {
+      // If an error occurs, set error state
+      setError(true);
+      setSuccess(false);
+    }
+  };
+
+  // UPDATE WORKOUT
+  const updateWorkout = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWorkout({
+      ...workout,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // UPDATE WORKOUT_EXERCISES
   const addWorkoutExercise = () => {
     setWorkoutExercises([
       ...workoutExercises,
-      { id: workoutExercises.length + 1, exercise_id: 0, workout_id: 1 },
+      {
+        id: WORKOUT_EXERCISE_ID_COUNT++,
+        exercise_id: 0,
+        workout_id: WORKOUT_ID,
+      },
     ]);
   };
 
-  // update workout exercise on exercise change
   const updateWorkoutExercise = (
     workoutExerciseId: number,
     updatedExderciseId: number
@@ -42,81 +98,13 @@ export function LogWorkout(props: LogWorkoutProps) {
     setWorkoutExercises(newState);
   };
 
-  return (
-    <div>
-      <div className="flex gap-4 mb-4 items-end">
-        <input
-          className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
-          id="date"
-          name="date"
-          type="date"
-        />
-
-        <input
-          className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
-          type="text"
-          placeholder="notes"
-          id="notes"
-          name="notes"
-        />
-
-        <input
-          className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
-          type="time"
-          id="time"
-          name="time"
-        />
-      </div>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {workoutExercises.map((workoutExercise) => (
-          <WorkoutExercise
-            key={workoutExercise.id}
-            exercises={exercises}
-            workoutExercise={workoutExercise}
-            onExerciseSelect={(updatedExderciseId: number) =>
-              updateWorkoutExercise(workoutExercise.id, updatedExderciseId)
-            }
-          />
-        ))}
-        <button
-          onClick={addWorkoutExercise}
-          className="bg-sky-200 p-2 shadow-[4px_4px] shadow-black border border-black h-max"
-        >
-          Add Workout Exercise
-        </button>
-      </div>
-    </div>
-  );
-}
-
-type WorkoutExerciseProps = {
-  exercises: Exercise[];
-  workoutExercise: Workout_Exercise;
-  onExerciseSelect: (updatedExderciseId: number) => void;
-};
-
-function WorkoutExercise(props: WorkoutExerciseProps) {
-  // imported
-  const { exercises, workoutExercise, onExerciseSelect } = props;
-
-  // managed
-  const [sets, setSets] = React.useState<Set[]>([]);
-
-  const addSet = () => {
-    setSets([
-      ...sets,
-      {
-        id: sets.length + 1,
-        order_index: sets.length + 1,
-        reps: sets[sets.length - 1]?.reps || 0,
-        workout_exercise_id: workoutExercise.id,
-        weight: sets[sets.length - 1]?.weight || 0,
-      },
-    ]);
+  // UPDATE SETS
+  const handleAddSet = (newSet: Set) => {
+    setSets([...sets, newSet]);
+    SET_ID_COUNT++;
   };
 
-  const updateSetWeight = (setId: number, newWeight: number) => {
+  const handleUpdateSetWeight = (setId: number, newWeight: number) => {
     const newState = sets.map((set: Set) => {
       if (set.id === setId) {
         return { ...set, weight: newWeight };
@@ -128,7 +116,7 @@ function WorkoutExercise(props: WorkoutExerciseProps) {
     setSets(newState);
   };
 
-  const updateSetReps = (setId: number, newReps: number) => {
+  const handleUpdateSetReps = (setId: number, newReps: number) => {
     const newState = sets.map((set: Set) => {
       if (set.id === setId) {
         return { ...set, reps: newReps };
@@ -141,91 +129,37 @@ function WorkoutExercise(props: WorkoutExerciseProps) {
   };
 
   return (
-    <form className="p-4 shadow-[4px_4px] shadow-black border border-black flex flex-col justify-between">
-      <div>
-        <h2 className="font-bold text-lg">
-          <select
-            id="exercise"
-            name="exercise"
-            className="border-0 bg-transparent"
-            onChange={(e) => onExerciseSelect(Number(e.target.value))}
-          >
-            <option value={0}>Select Workout</option>
-            {exercises?.map((exercise: Exercise) => (
-              <option key={exercise.id} value={exercise.id}>
-                {exercise.name}
-              </option>
-            ))}
-          </select>
-        </h2>
+    <div>
+      <WorkoutDetails
+        workout={workout}
+        updateWorkout={(e: React.ChangeEvent<HTMLInputElement>) =>
+          updateWorkout(e)
+        }
+      />
 
-        <table className=" w-full table-fixed mb-2">
-          <thead>
-            <tr className="text-left">
-              <th className="font-normal">id</th>
-              <th className="font-normal">weight</th>
-              <th className="font-normal">reps</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {sets.map((set) => (
-              <WorkoutSet
-                key={set.id}
-                set={set}
-                onSetWeightUpdate={(newWeight) =>
-                  updateSetWeight(set.id, newWeight)
-                }
-                onSetRepsUpdate={(newReps) => updateSetReps(set.id, newReps)}
-              />
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <WorkoutExerciseGrid
+        workoutExercises={workoutExercises}
+        sets={sets}
+        nextSetId={SET_ID_COUNT}
+        exercises={exercises}
+        updateWorkoutExercise={(a, b) => updateWorkoutExercise(a, b)}
+        handleAddWorkout={addWorkoutExercise}
+        handleAddSet={(newSet: Set) => handleAddSet(newSet)}
+        handleUpdateSetWeight={(setId: number, newWeight) =>
+          handleUpdateSetWeight(setId, newWeight)
+        }
+        handleUpdateSetReps={(setId: number, newReps) =>
+          handleUpdateSetReps(setId, newReps)
+        }
+      />
 
       <button
-        onClick={addSet}
         type="button"
-        className="bg-sky-600 shadow-[4px_4px] shadow-black border border-black p-1"
+        className="bg-sky-200 absolute bottom-4 right-4 p-2 shadow-[4px_4px] shadow-black border border-black"
+        onClick={handleCreateWorkout}
       >
-        Add Set
+        Log it!
       </button>
-    </form>
-  );
-}
-
-type WorkoutSetProps = {
-  set: Set;
-  onSetWeightUpdate: (newWeight: number) => void;
-  onSetRepsUpdate: (newReps: number) => void;
-};
-
-function WorkoutSet(props: WorkoutSetProps) {
-  // imported
-  const { set, onSetWeightUpdate, onSetRepsUpdate } = props;
-
-  // derived
-  const isGray = set.id % 2 != 0;
-
-  return (
-    <tr>
-      <td className={`${isGray && "bg-slate-200"}`}>{set.id}</td>
-      <td className={`${isGray && "bg-slate-200"}`}>
-        <input
-          className="w-full bg-inherit"
-          type="number"
-          value={set.weight}
-          onChange={(e) => onSetWeightUpdate(e.target.valueAsNumber)}
-        />
-      </td>
-      <td className={`${isGray && "bg-slate-200"}`}>
-        <input
-          className="w-full bg-inherit"
-          type="number"
-          value={set.reps}
-          onChange={(e) => onSetRepsUpdate(e.target.valueAsNumber)}
-        />
-      </td>
-    </tr>
+    </div>
   );
 }

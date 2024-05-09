@@ -7,7 +7,7 @@ import { WorkoutCard } from "../ui/History/WorkoutCard";
 export default function Page() {
   return (
     <main className="w-full min-h-[calc(100vh-74px)] p-8">
-      <h1 className="text-xl mb-4">workouts</h1>
+      <h1 className="font-bold text-4xl mb-4">Workout History</h1>
 
       <Suspense fallback={<div>Loading Grid...</div>}>
         <WorkoutGrid />
