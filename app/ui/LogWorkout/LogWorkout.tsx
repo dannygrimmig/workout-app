@@ -213,7 +213,7 @@ function WorkoutSet(props: WorkoutSetProps) {
           className="w-full bg-inherit"
           type="number"
           value={set.weight}
-          onChange={(e) => onSetWeightUpdate(e.target.value)}
+          onChange={(e) => onSetWeightUpdate(e.target.valueAsNumber)}
         />
       </td>
       <td className={`${isGray && "bg-slate-200"}`}>
@@ -221,7 +221,7 @@ function WorkoutSet(props: WorkoutSetProps) {
           className="w-full bg-inherit"
           type="number"
           value={set.reps}
-          onChange={(e) => onSetRepsUpdate(e.target.value)}
+          onChange={(e) => onSetRepsUpdate(e.target.valueAsNumber)}
         />
       </td>
     </tr>
