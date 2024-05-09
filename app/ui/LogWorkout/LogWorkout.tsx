@@ -44,7 +44,6 @@ export function LogWorkout(props: LogWorkoutProps) {
 
   return (
     <div>
-      <h1 className="font-bold text-4xl mb-4">Log Workout</h1>
       <div className="flex gap-4 mb-4 items-end">
         <input
           className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
@@ -69,7 +68,7 @@ export function LogWorkout(props: LogWorkoutProps) {
         />
       </div>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {workoutExercises.map((workoutExercise) => (
           <WorkoutExercise
             key={workoutExercise.id}
@@ -142,53 +141,56 @@ function WorkoutExercise(props: WorkoutExerciseProps) {
   };
 
   return (
-    <div className="p-4 shadow-[4px_4px] shadow-black border border-black h-max">
-      <h2 className="font-bold text-lg">
-        <select
-          id="exercise"
-          name="exercise"
-          className="border-0 bg-transparent"
-          onChange={(e) => onExerciseSelect(Number(e.target.value))}
-        >
-          <option value={0}>Select Workout</option>
-          {exercises?.map((exercise: Exercise) => (
-            <option key={exercise.id} value={exercise.id}>
-              {exercise.name}
-            </option>
-          ))}
-        </select>
-      </h2>
+    <form className="p-4 shadow-[4px_4px] shadow-black border border-black flex flex-col justify-between">
+      <div>
+        <h2 className="font-bold text-lg">
+          <select
+            id="exercise"
+            name="exercise"
+            className="border-0 bg-transparent"
+            onChange={(e) => onExerciseSelect(Number(e.target.value))}
+          >
+            <option value={0}>Select Workout</option>
+            {exercises?.map((exercise: Exercise) => (
+              <option key={exercise.id} value={exercise.id}>
+                {exercise.name}
+              </option>
+            ))}
+          </select>
+        </h2>
 
-      <table className=" w-full table-fixed mb-2">
-        <thead>
-          <tr className="text-left">
-            <th className="font-normal">id</th>
-            <th className="font-normal">weight</th>
-            <th className="font-normal">reps</th>
-          </tr>
-        </thead>
+        <table className=" w-full table-fixed mb-2">
+          <thead>
+            <tr className="text-left">
+              <th className="font-normal">id</th>
+              <th className="font-normal">weight</th>
+              <th className="font-normal">reps</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {sets.map((set) => (
-            <WorkoutSet
-              key={set.id}
-              set={set}
-              onSetWeightUpdate={(newWeight) =>
-                updateSetWeight(set.id, newWeight)
-              }
-              onSetRepsUpdate={(newReps) => updateSetReps(set.id, newReps)}
-            />
-          ))}
-        </tbody>
-      </table>
+          <tbody>
+            {sets.map((set) => (
+              <WorkoutSet
+                key={set.id}
+                set={set}
+                onSetWeightUpdate={(newWeight) =>
+                  updateSetWeight(set.id, newWeight)
+                }
+                onSetRepsUpdate={(newReps) => updateSetReps(set.id, newReps)}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <button
         onClick={addSet}
-        className="bg-sky-600 shadow-[4px_4px] shadow-black border border-black p-1 self-end"
+        type="button"
+        className="bg-sky-600 shadow-[4px_4px] shadow-black border border-black p-1"
       >
         Add Set
       </button>
-    </div>
+    </form>
   );
 }
 
