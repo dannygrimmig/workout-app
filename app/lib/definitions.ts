@@ -11,7 +11,6 @@ export type Workout = {
   id: number;
   date: Date;
   time: number;
-  duration: PostgresInterval;
   notes: string;
   user_id: number;
 };
