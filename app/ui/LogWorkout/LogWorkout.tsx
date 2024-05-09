@@ -16,11 +16,30 @@ export function LogWorkout(props: LogWorkoutProps) {
     Workout_Exercise[]
   >([]);
 
+  // add workout exercise to workout
   const addWorkoutExercise = () => {
     setWorkoutExercises([
       ...workoutExercises,
-      { id: 0, exercise_id: 1, workout_id: 1 },
+      { id: workoutExercises.length + 1, exercise_id: 0, workout_id: 1 },
     ]);
+  };
+
+  // update workout exercise on exercise change
+  const updateWorkoutExercise = (
+    workoutExerciseId: number,
+    updatedExderciseId: number
+  ) => {
+    const newState = workoutExercises.map(
+      (workoutExercise: Workout_Exercise) => {
+        if (workoutExercise.id === workoutExerciseId) {
+          return { ...workoutExercise, exercise_id: updatedExderciseId };
+        } else {
+          return workoutExercise;
+        }
+      }
+    );
+
+    setWorkoutExercises(newState);
   };
 
   return (
@@ -56,6 +75,9 @@ export function LogWorkout(props: LogWorkoutProps) {
             key={workoutExercise.id}
             exercises={exercises}
             workoutExercise={workoutExercise}
+            onExerciseSelect={(updatedExderciseId: number) =>
+              updateWorkoutExercise(workoutExercise.id, updatedExderciseId)
+            }
           />
         ))}
         <button
@@ -72,27 +94,53 @@ export function LogWorkout(props: LogWorkoutProps) {
 type WorkoutExerciseProps = {
   exercises: Exercise[];
   workoutExercise: Workout_Exercise;
+  onExerciseSelect: (updatedExderciseId: number) => void;
 };
 
 function WorkoutExercise(props: WorkoutExerciseProps) {
   // imported
-  const { exercises, workoutExercise } = props;
+  const { exercises, workoutExercise, onExerciseSelect } = props;
 
   // managed
   const [sets, setSets] = React.useState<Set[]>([]);
 
-  const addWorkoutExercise = () => {
+  const addSet = () => {
     setSets([
       ...sets,
       {
         id: sets.length + 1,
-        order_index: 1,
-        reps: 10,
+        order_index: sets.length + 1,
+        reps: sets[sets.length - 1]?.reps || 0,
         workout_exercise_id: workoutExercise.id,
-        weight: 25,
+        weight: sets[sets.length - 1]?.weight || 0,
       },
     ]);
   };
+
+  const updateSetWeight = (setId: number, newWeight: number) => {
+    const newState = sets.map((set: Set) => {
+      if (set.id === setId) {
+        return { ...set, weight: newWeight };
+      } else {
+        return set;
+      }
+    });
+
+    setSets(newState);
+  };
+
+  const updateSetReps = (setId: number, newReps: number) => {
+    const newState = sets.map((set: Set) => {
+      if (set.id === setId) {
+        return { ...set, reps: newReps };
+      } else {
+        return set;
+      }
+    });
+
+    setSets(newState);
+  };
+
   return (
     <div className="p-4 shadow-[4px_4px] shadow-black border border-black h-max">
       <h2 className="font-bold text-lg">
@@ -100,8 +148,9 @@ function WorkoutExercise(props: WorkoutExerciseProps) {
           id="exercise"
           name="exercise"
           className="border-0 bg-transparent"
+          onChange={(e) => onExerciseSelect(Number(e.target.value))}
         >
-          <option value="">Select Workout</option>
+          <option value={0}>Select Workout</option>
           {exercises?.map((exercise: Exercise) => (
             <option key={exercise.id} value={exercise.id}>
               {exercise.name}
@@ -121,13 +170,20 @@ function WorkoutExercise(props: WorkoutExerciseProps) {
 
         <tbody>
           {sets.map((set) => (
-            <WorkoutSet key={set.id} {...set} />
+            <WorkoutSet
+              key={set.id}
+              set={set}
+              onSetWeightUpdate={(newWeight) =>
+                updateSetWeight(set.id, newWeight)
+              }
+              onSetRepsUpdate={(newReps) => updateSetReps(set.id, newReps)}
+            />
           ))}
         </tbody>
       </table>
 
       <button
-        onClick={addWorkoutExercise}
+        onClick={addSet}
         className="bg-sky-600 shadow-[4px_4px] shadow-black border border-black p-1 self-end"
       >
         Add Set
@@ -136,16 +192,37 @@ function WorkoutExercise(props: WorkoutExerciseProps) {
   );
 }
 
-function WorkoutSet(set: Set) {
+type WorkoutSetProps = {
+  set: Set;
+  onSetWeightUpdate: (newWeight: number) => void;
+  onSetRepsUpdate: (newReps: number) => void;
+};
+
+function WorkoutSet(props: WorkoutSetProps) {
+  // imported
+  const { set, onSetWeightUpdate, onSetRepsUpdate } = props;
+
+  // derived
   const isGray = set.id % 2 != 0;
+
   return (
     <tr>
       <td className={`${isGray && "bg-slate-200"}`}>{set.id}</td>
       <td className={`${isGray && "bg-slate-200"}`}>
-        <input className="w-full bg-inherit" type="number" value={set.weight} />
+        <input
+          className="w-full bg-inherit"
+          type="number"
+          value={set.weight}
+          onChange={(e) => onSetWeightUpdate(e.target.value)}
+        />
       </td>
       <td className={`${isGray && "bg-slate-200"}`}>
-        <input className="w-full bg-inherit" type="number" value={set.reps} />
+        <input
+          className="w-full bg-inherit"
+          type="number"
+          value={set.reps}
+          onChange={(e) => onSetRepsUpdate(e.target.value)}
+        />
       </td>
     </tr>
   );
