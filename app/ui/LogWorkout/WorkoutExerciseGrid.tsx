@@ -122,8 +122,7 @@ export function WorkoutExerciseCard(props: WorkoutExerciseCardProps) {
         <table className=" w-full table-fixed mb-2">
           <thead>
             <tr className="text-left">
-              <th className="font-normal">id</th>
-              <th className="font-normal">order</th>
+              <th className="font-normal">set</th>
               <th className="font-normal">weight</th>
               <th className="font-normal">reps</th>
             </tr>
@@ -168,11 +167,10 @@ function WorkoutSet(props: WorkoutSetProps) {
   const { set, onSetWeightUpdate, onSetRepsUpdate } = props;
 
   // derived
-  const isGray = set.id % 2 != 0;
+  const isGray = set.order_index % 2 != 0;
 
   return (
     <tr className={`${isGray && "bg-slate-200"}`}>
-      <td>{set.id}</td>
       <td>{set.order_index}</td>
       <td>
         <input
