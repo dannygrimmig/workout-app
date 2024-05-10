@@ -26,4 +26,4 @@ export function NavBar() {
   );
 }
 
-const LINKS = ["workout", "history", "progress"];
+const LINKS = ["workout", "history"];

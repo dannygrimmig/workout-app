@@ -4,16 +4,16 @@ import { NewWorkout } from "./ui/Dashboard/NewWorkout";
 export default function Home() {
   return (
     <main className="w-full min-h-[calc(100vh-74px)] grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 p-8">
-      <GridItem
-        link="history"
-        className="md:col-span-2 md:row-span-2"
-      ></GridItem>
+      <GridItem link="history" className="md:col-span-2 md:row-span-2">
+        <h1 className="font-bold">Workout Tracking App</h1>
+        <p>🚧 work in progress</p>
+        <p>📈 data analytics to come here</p>
+      </GridItem>
+
       <GridItem link="add">
-        <div>
-          <p>id: {CURRENT_USER.id}</p>
-          <p>name: {CURRENT_USER.name}</p>
-          <p>email: {CURRENT_USER.email}</p>
-        </div>
+        <h1 className="font-bold">Current User</h1>
+        <p>🏋️ profile data to come</p>
+        <p>🪪 auth (sign in/out)</p>
       </GridItem>
       <GridItem link="profile">
         <NewWorkout />
@@ -32,7 +32,7 @@ function GridItem(props: GridItem) {
   const { link, className, children } = props;
   return (
     <div
-      className={`${className} rounded-2xl p-8 shadow-lg border shadow-slate-300`}
+      className={`${className} p-8 shadow-[4px_4px] shadow-black border border-black`}
     >
       {children}
     </div>
