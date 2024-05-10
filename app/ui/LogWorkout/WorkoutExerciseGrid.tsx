@@ -56,7 +56,7 @@ export function WorkoutExerciseGrid(props: WorkoutExerciseGridProps) {
 
       <button
         onClick={handleAddWorkout}
-        className="bg-sky-200 p-2 shadow-[4px_4px] shadow-black border border-black h-max"
+        className="bg-sky-300 hover:bg-sky-500 p-2 shadow-[4px_4px] shadow-black border border-black h-max"
       >
         Add Workout Exercise
       </button>
@@ -148,7 +148,7 @@ export function WorkoutExerciseCard(props: WorkoutExerciseCardProps) {
       <button
         onClick={addSet}
         type="button"
-        className="bg-sky-600 shadow-[4px_4px] shadow-black border border-black p-1"
+        className="bg-sky-600 hover:bg-sky-700 text-white shadow-[4px_4px] shadow-black border border-black p-1"
       >
         Add Set
       </button>

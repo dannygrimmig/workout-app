@@ -11,7 +11,7 @@ export function WorkoutDetails(props: WorkoutDetailsProps) {
   return (
     <div className="flex gap-4 mb-4 items-end">
       <input
-        className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
+        className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
         id="date"
         name="date"
         type="date"
@@ -20,7 +20,7 @@ export function WorkoutDetails(props: WorkoutDetailsProps) {
       />
 
       <input
-        className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
+        className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
         type="text"
         placeholder="notes"
         id="notes"
@@ -30,7 +30,7 @@ export function WorkoutDetails(props: WorkoutDetailsProps) {
       />
 
       <input
-        className=" bg-inherit p-4 shadow-[4px_4px] shadow-black border border-black"
+        className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
         type="time"
         id="time"
         name="time"

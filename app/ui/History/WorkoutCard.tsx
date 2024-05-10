@@ -32,7 +32,7 @@ export function WorkoutCard(props: WorkoutCardProps) {
     <button
       type="button"
       onClick={() => setIsOpen(!isOpen)}
-      className="border p-4 shadow-lg shadow-slate-300 h-max text-left"
+      className="border p-4 shadow-lg shadow-slate-300 h-max text-left hover:shadow-slate-400"
     >
       <h1 className="font-bold">{workout.date}</h1>
       <div className="flex gap-4">
