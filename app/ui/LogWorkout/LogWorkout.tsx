@@ -41,26 +41,6 @@ export function LogWorkout(props: LogWorkoutProps) {
 
   const [sets, setSets] = React.useState<Set[]>([]);
 
-  const [success, setSuccess] = React.useState(false);
-  const [error, setError] = React.useState(false);
-
-  const handleCreateWorkout = async () => {
-    try {
-      await createWorkout(workout, workoutExercises, sets);
-
-      // If successful
-      setWorkout(EMPTY_WORKOUT);
-      setWorkoutExercises([]);
-      setSets([]);
-      setSuccess(true);
-      setError(false);
-    } catch (error) {
-      // If an error occurs, set error state
-      setError(true);
-      setSuccess(false);
-    }
-  };
-
   // UPDATE WORKOUT
   const updateWorkout = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWorkout({
@@ -156,7 +136,7 @@ export function LogWorkout(props: LogWorkoutProps) {
       <button
         type="button"
         className="bg-sky-200 absolute bottom-4 right-4 p-2 shadow-[4px_4px] shadow-black border border-black"
-        onClick={handleCreateWorkout}
+        onClick={() => createWorkout(workout, workoutExercises, sets)}
       >
         Log it!
       </button>

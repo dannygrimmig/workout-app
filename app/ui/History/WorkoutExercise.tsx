@@ -1,13 +1,18 @@
-import { fetchExercises, fetchSets } from "@/app/lib/data";
-import { Exercise, Set, Workout_Exercise } from "@/app/lib/definitions";
+import { Exercise } from "@/app/lib/definitions";
+import { WorkoutExerciseObject } from "./WorkoutCard";
 
-export async function WorkoutExercise(workoutExercise: Workout_Exercise) {
-  const sets: Set[] = await fetchSets(workoutExercise.id);
-  const exercises: Exercise[] = await fetchExercises();
+type WorkoutExerciseProps = {
+  workoutExerciseObject: WorkoutExerciseObject;
+  exercises: Exercise[];
+};
+
+export function WorkoutExercise(props: WorkoutExerciseProps) {
+  const { workoutExerciseObject, exercises } = props;
+  const { workoutExercise, sets } = workoutExerciseObject;
 
   // derived
   const currentExercise = exercises.find(
-    (exercise) => exercise.id === workoutExercise.exercise_id
+    (curr) => curr.id === workoutExercise.exercise_id
   );
 
   return (

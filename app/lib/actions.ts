@@ -2,6 +2,8 @@
 
 import { createClient } from "@vercel/postgres";
 import { Set, Workout, Workout_Exercise } from "./definitions";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createWorkout(
   workout: Workout,
@@ -63,5 +65,9 @@ export async function createWorkout(
     };
   } finally {
     await client.end();
+
+    // Redirect to History Page
+    revalidatePath("/history");
+    redirect("/history");
   }
 }

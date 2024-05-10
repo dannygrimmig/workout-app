@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { CURRENT_USER } from "../lib/constants";
-import { fetchUserWorkouts } from "../lib/data";
-import { User, Workout } from "../lib/definitions";
-import { WorkoutCard } from "../ui/History/WorkoutCard";
+import { fetchExercises, fetchUserWorkouts } from "../lib/data";
+import { Exercise, User, Workout } from "../lib/definitions";
+import { WorkoutCardContainer } from "../ui/History/WorkoutCardContainer";
 
 export default function Page() {
   return (
@@ -19,9 +19,10 @@ export default function Page() {
 async function WorkoutGrid() {
   // imported
   const user: User = CURRENT_USER; //temp
+  const workouts: Workout[] = await fetchUserWorkouts(user.id);
+  const exercises: Exercise[] = await fetchExercises();
 
   // derived
-  const workouts: Workout[] = await fetchUserWorkouts(user.id);
   const orderedWorkouts: Workout[] = workouts.sort(
     (a: Workout, b: Workout) => b.date.getTime() - a.date.getTime()
   );
@@ -29,7 +30,11 @@ async function WorkoutGrid() {
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {orderedWorkouts.map((workout) => (
-        <WorkoutCard key={workout.id} {...workout} />
+        <WorkoutCardContainer
+          key={workout.id}
+          workout={workout}
+          exercises={exercises}
+        />
       ))}
     </div>
   );

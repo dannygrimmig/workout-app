@@ -1,26 +1,56 @@
-import { fetchWorkoutExercises } from "@/app/lib/data";
-import { Workout, Workout_Exercise } from "@/app/lib/definitions";
+"use client";
+import * as React from "react";
+
+import { Exercise, Set, Workout_Exercise } from "@/app/lib/definitions";
 import { WorkoutExercise } from "./WorkoutExercise";
 
-export async function WorkoutCard(workout: Workout) {
-  const exercises: Workout_Exercise[] = await fetchWorkoutExercises(workout.id);
+export type WorkoutExerciseObject = {
+  workoutExercise: Workout_Exercise;
+  sets: Set[];
+};
+
+type WorkoutCardProps = {
+  workout: {
+    id: number;
+    date: string;
+    time: string;
+    notes: string;
+    user_id: number;
+  };
+  workoutExercises: WorkoutExerciseObject[];
+  exercises: Exercise[];
+};
+
+export function WorkoutCard(props: WorkoutCardProps) {
+  // imported
+  const { workout, workoutExercises, exercises } = props;
+
+  // managed
+  const [isOpen, setIsOpen] = React.useState(false);
 
   return (
     <button
       type="button"
+      onClick={() => setIsOpen(!isOpen)}
       className="border p-4 shadow-lg shadow-slate-300 h-max text-left"
     >
-      <h1 className="font-bold">{workout.date.toDateString()}</h1>
+      <h1 className="font-bold">{workout.date}</h1>
       <div className="flex gap-4">
         <p>{workout.notes}</p>
-        <p>{workout.time.toString()}</p>
+        <p>{workout.time}</p>
       </div>
 
-      <div className="mt-4">
-        {exercises.map((exercise) => (
-          <WorkoutExercise key={exercise.id} {...exercise} />
-        ))}
-      </div>
+      {isOpen && (
+        <div>
+          {workoutExercises.map((workoutExercise) => (
+            <WorkoutExercise
+              key={workoutExercise.workoutExercise.id}
+              workoutExerciseObject={workoutExercise}
+              exercises={exercises}
+            />
+          ))}
+        </div>
+      )}
     </button>
   );
 }
