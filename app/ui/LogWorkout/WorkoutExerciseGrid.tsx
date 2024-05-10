@@ -119,7 +119,7 @@ export function WorkoutExerciseCard(props: WorkoutExerciseCardProps) {
           </select>
         </h2>
 
-        <table className=" w-full table-fixed mb-2">
+        <table className="w-full table-fixed mb-2">
           <thead>
             <tr className="text-left">
               <th className="font-normal">set</th>

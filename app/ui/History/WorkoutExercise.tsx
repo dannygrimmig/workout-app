@@ -21,20 +21,26 @@ export function WorkoutExercise(props: WorkoutExerciseProps) {
         <p className="font-normal">{currentExercise?.name}</p>
       </div>
 
-      <table>
+      <table className="w-full table-fixed">
         <thead>
-          <tr>
-            <th className="font-light pr-2">reps</th>
-            <th className="font-light">weight</th>
+          <tr className="text-left">
+            <th className="font-normal">set</th>
+            <th className="font-normal">reps</th>
+            <th className="font-normal">weight</th>
           </tr>
         </thead>
         <tbody>
-          {sets.map((set) => (
-            <tr key={set.id}>
-              <td>{set.reps}</td>
-              <td>{set.weight}</td>
-            </tr>
-          ))}
+          {sets.map((set) => {
+            const isGray = set.order_index % 2 != 0;
+
+            return (
+              <tr key={set.id} className={`${isGray && "bg-slate-200"}`}>
+                <td>{set.order_index}</td>
+                <td>{set.reps}</td>
+                <td>{set.weight}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
