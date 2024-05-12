@@ -10,7 +10,7 @@ export function NewWorkout() {
         <NewWorkoutButton
           type={"secondary"}
           text="From Template"
-          link="signup"
+          link="premium"
         />
       </div>
     </div>

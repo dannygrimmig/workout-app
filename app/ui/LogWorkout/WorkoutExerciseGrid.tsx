@@ -176,6 +176,7 @@ function WorkoutSet(props: WorkoutSetProps) {
         <input
           className="w-full bg-inherit"
           type="number"
+          inputMode="numeric"
           value={set.weight}
           onChange={(e) => onSetWeightUpdate(e.target.valueAsNumber)}
         />
@@ -184,6 +185,7 @@ function WorkoutSet(props: WorkoutSetProps) {
         <input
           className="w-full bg-inherit"
           type="number"
+          inputMode="numeric"
           value={set.reps}
           onChange={(e) => onSetRepsUpdate(e.target.valueAsNumber)}
         />

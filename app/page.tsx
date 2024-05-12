@@ -3,7 +3,7 @@ import { NewWorkout } from "./ui/Dashboard/NewWorkout";
 
 export default function Home() {
   return (
-    <main className="w-full min-h-[calc(100vh-74px)] grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 p-8">
+    <main className="w-full min-h-[calc(100vh-74px)] grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 p-2 sm:p-8">
       <GridItem link="history" className="md:col-span-2 md:row-span-2">
         <h1 className="font-bold">Workout Tracking App</h1>
         <p>🚧 work in progress</p>

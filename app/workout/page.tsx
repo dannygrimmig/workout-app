@@ -6,7 +6,7 @@ import { LogWorkout } from "../ui/LogWorkout/LogWorkout";
 
 export default function Page() {
   return (
-    <div className="w-full min-h-[calc(100vh-74px)] p-4 sm:p-8">
+    <div className="w-full min-h-[calc(100vh-74px)] p-2 sm:p-8">
       <h1 className="font-bold text-4xl mb-4">Log Workout</h1>
 
       <Suspense fallback={<div>Page Loading...</div>}>

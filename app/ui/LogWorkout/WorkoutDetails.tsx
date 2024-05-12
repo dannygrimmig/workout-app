@@ -9,7 +9,7 @@ export function WorkoutDetails(props: WorkoutDetailsProps) {
   const { workout, updateWorkout } = props;
 
   return (
-    <div className="flex gap-4 mb-4 items-end">
+    <div className="grid sm:grid-cols-3 gap-4 mb-4 items-end">
       <input
         className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
         id="date"
@@ -21,20 +21,20 @@ export function WorkoutDetails(props: WorkoutDetailsProps) {
 
       <input
         className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
-        type="text"
-        placeholder="notes"
-        id="notes"
-        name="notes"
-        value={workout.notes}
+        type="time"
+        id="time"
+        name="time"
+        value={workout.time}
         onChange={(e) => updateWorkout(e)}
       />
 
       <input
         className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
-        type="time"
-        id="time"
-        name="time"
-        value={workout.time}
+        type="text"
+        placeholder="notes"
+        id="notes"
+        name="notes"
+        value={workout.notes}
         onChange={(e) => updateWorkout(e)}
       />
     </div>

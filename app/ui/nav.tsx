@@ -28,7 +28,7 @@ export function NavBar() {
       </div>
 
       <Link
-        href={"/signup"}
+        href={"/premium"}
         className="py-1 px-2 sm:px-4 border border-black hover:shadow-[4px_4px] rounded-full transition-all"
       >
         coming soon
