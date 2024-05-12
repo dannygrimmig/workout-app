@@ -9,9 +9,9 @@ export function WorkoutDetails(props: WorkoutDetailsProps) {
   const { workout, updateWorkout } = props;
 
   return (
-    <div className="sm:grid sm:grid-cols-3 gap-4 mb-4 items-end">
+    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4 items-end">
       <input
-        className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
+        className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black w-full"
         id="date"
         name="date"
         type="date"
@@ -20,7 +20,7 @@ export function WorkoutDetails(props: WorkoutDetailsProps) {
       />
 
       <input
-        className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
+        className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black w-full"
         type="time"
         id="time"
         name="time"
@@ -29,7 +29,7 @@ export function WorkoutDetails(props: WorkoutDetailsProps) {
       />
 
       <input
-        className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
+        className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black col-span-2 sm:col-span-1"
         type="text"
         placeholder="notes"
         id="notes"
