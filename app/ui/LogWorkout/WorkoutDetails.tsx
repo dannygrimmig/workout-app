@@ -9,7 +9,7 @@ export function WorkoutDetails(props: WorkoutDetailsProps) {
   const { workout, updateWorkout } = props;
 
   return (
-    <div className="grid sm:grid-cols-3 gap-4 mb-4 items-end">
+    <div className="sm:grid sm:grid-cols-3 gap-4 mb-4 items-end">
       <input
         className="bg-inherit hover:bg-slate-200 cursor-pointer p-4 shadow-[4px_4px] shadow-black border border-black"
         id="date"
