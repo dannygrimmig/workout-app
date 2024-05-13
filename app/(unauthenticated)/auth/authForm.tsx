@@ -1,13 +1,55 @@
 "use client";
+
 import * as React from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export function Authentication() {
+  const router = useRouter();
   // managed
-  const [form, setForm] = React.useState({ username: "", password: "" });
   const [isLogIn, setIsLogIn] = React.useState(true);
 
   // derived
   const actionText = isLogIn ? "Log In" : "Sign Up";
+
+  // Helpers
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    try {
+      fetch("../api/auth/register", {
+        method: "POSt",
+        body: JSON.stringify({
+          email: formData.get("email"),
+          password: formData.get("password"),
+        }),
+      });
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Handle SignIn");
+
+    const formData = new FormData(e.currentTarget);
+    const response = await signIn("credentials", {
+      email: formData.get("email"),
+      password: formData.get("password"),
+      redirect: false,
+    });
+
+    if (!response?.error) {
+      router.push("/");
+      router.refresh();
+    }
+
+    console.log(response);
+  };
 
   return (
     <div className="grid sm:grid-cols-10 min-h-screen">
@@ -21,7 +63,7 @@ export function Authentication() {
 
         <form
           className="flex flex-col gap-2"
-          onSubmit={() => console.log("submit")}
+          onSubmit={isLogIn ? handleSignIn : handleRegister}
         >
           <div>
             <label htmlFor="email">Email</label>
@@ -32,7 +74,6 @@ export function Authentication() {
               className="px-2 py-1 w-full shadow-[4px_4px] shadow-black border border-black"
             />
           </div>
-
           <div>
             <p>Password</p>
             <input
@@ -49,6 +90,7 @@ export function Authentication() {
             {actionText}
           </button>
         </form>
+
         <div className="pt-4 border-t">
           <p>{isLogIn ? "Don't have" : "Already have"} an account?</p>
 
