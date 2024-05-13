@@ -4,6 +4,12 @@ import { fetchExercises } from "../lib/data";
 import { Exercise, User } from "../lib/definitions";
 import { LogWorkout } from "../ui/LogWorkout/LogWorkout";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Workout",
+};
+
 export default function Page() {
   return (
     <div className="w-full min-h-[calc(100vh-74px)] p-2 sm:p-8">

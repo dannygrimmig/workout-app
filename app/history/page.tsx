@@ -4,6 +4,12 @@ import { fetchExercises, fetchUserWorkouts } from "../lib/data";
 import { Exercise, User, Workout } from "../lib/definitions";
 import { WorkoutCardContainer } from "../ui/History/WorkoutCardContainer";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "History",
+};
+
 export default function Page() {
   return (
     <main className="w-full min-h-[calc(100vh-74px)] p-2 sm:p-8">

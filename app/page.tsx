@@ -1,4 +1,3 @@
-import { CURRENT_USER } from "./lib/constants";
 import { NewWorkout } from "./ui/Dashboard/NewWorkout";
 
 export default function Home() {
