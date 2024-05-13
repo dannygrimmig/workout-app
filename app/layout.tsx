@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
-import { Kanit } from "next/font/google";
 import "./globals.css";
-import { NavBar } from "./ui/nav";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
@@ -13,12 +12,6 @@ export const metadata: Metadata = {
   keywords: ["gym", "workout", "tracking"],
 };
 
-const kanit = Kanit({
-  weight: ["200", "400", "600"],
-  style: ["normal"],
-  subsets: ["latin"],
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,10 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${kanit.className} bg-slate-100 font-light`}>
-        <NavBar />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

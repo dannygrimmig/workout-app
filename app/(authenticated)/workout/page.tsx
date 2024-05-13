@@ -1,8 +1,8 @@
 import { Suspense } from "react";
-import { CURRENT_USER } from "../lib/constants";
-import { fetchExercises } from "../lib/data";
-import { Exercise, User } from "../lib/definitions";
-import { LogWorkout } from "../ui/LogWorkout/LogWorkout";
+import { CURRENT_USER } from "../../lib/constants";
+import { fetchExercises } from "../../lib/data";
+import { Exercise, User } from "../../lib/definitions";
+import { LogWorkout } from "../../ui/LogWorkout/LogWorkout";
 
 import { Metadata } from "next";
 

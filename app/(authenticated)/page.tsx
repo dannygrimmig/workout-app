@@ -1,4 +1,4 @@
-import { NewWorkout } from "./ui/Dashboard/NewWorkout";
+import { NewWorkout } from "../ui/Dashboard/NewWorkout";
 
 export default function Home() {
   return (
