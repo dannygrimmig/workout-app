@@ -21,6 +21,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         `;
 
         const user = response.rows[0];
+        console.log({ user });
         if (!user) {
           // No user found, so this is their first attempt to login
           // meaning this is also the place you could do registration

@@ -17,19 +17,14 @@ export function Authentication() {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    try {
-      fetch("../api/auth/register", {
-        method: "POSt",
-        body: JSON.stringify({
-          email: formData.get("email"),
-          password: formData.get("password"),
-        }),
-      });
-      router.push("/");
-      router.refresh();
-    } catch (error) {
-      console.log(error);
-    }
+
+    const response = await fetch("../api/auth/register", {
+      method: "POST",
+      body: JSON.stringify({
+        email: formData.get("email"),
+        password: formData.get("password"),
+      }),
+    });
   };
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {

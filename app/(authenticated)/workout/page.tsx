@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { CURRENT_USER } from "../../lib/constants";
-import { fetchExercises } from "../../lib/data";
+import { fetchExercises, getUser } from "../../lib/data";
 import { Exercise, User } from "../../lib/definitions";
 import { LogWorkout } from "../../ui/LogWorkout/LogWorkout";
 
@@ -24,13 +24,13 @@ export default function Page() {
 
 async function AsyncContainer() {
   // imported
-  const user: User = CURRENT_USER; //temp
   const exercises: Exercise[] = await fetchExercises();
+  const user: User = await getUser(); //temp
 
   // derived
   return (
     <Suspense fallback={<div>AsyncContainer...</div>}>
-      <LogWorkout exercises={exercises} />
+      <LogWorkout exercises={exercises} user={user} />
     </Suspense>
   );
 }

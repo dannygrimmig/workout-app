@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   Exercise,
   Set,
+  User,
   Workout,
   Workout_Exercise,
 } from "@/app/lib/definitions";
@@ -26,14 +27,18 @@ let SET_ID_COUNT = 0;
 
 type LogWorkoutProps = {
   exercises: Exercise[];
+  user: User;
 };
 
 export function LogWorkout(props: LogWorkoutProps) {
   // imported
-  const { exercises } = props;
+  const { exercises, user } = props;
 
   // managed
-  const [workout, setWorkout] = React.useState<Workout>(EMPTY_WORKOUT);
+  const [workout, setWorkout] = React.useState<Workout>({
+    ...EMPTY_WORKOUT,
+    user_id: user.id,
+  });
 
   const [workoutExercises, setWorkoutExercises] = React.useState<
     Workout_Exercise[]
