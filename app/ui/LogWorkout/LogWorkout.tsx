@@ -135,7 +135,7 @@ export function LogWorkout(props: LogWorkoutProps) {
 
       <button
         type="button"
-        className="bg-sky-200 hover:bg-sky-400 absolute bottom-4 right-4 p-2 shadow-[4px_4px] shadow-black border border-black"
+        className="bg-sky-200 hover:bg-sky-400 fixed bottom-4 right-4 p-2 shadow-[4px_4px] shadow-black border border-black"
         onClick={() => createWorkout(workout, workoutExercises, sets)}
       >
         Log it!
