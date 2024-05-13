@@ -43,7 +43,9 @@ async function WorkoutGrid() {
         />
       ))}
 
-      {orderedWorkouts.length <= 0 && <p>add workouts!</p>}
+      {orderedWorkouts.length <= 0 && (
+        <p>No Workout History... add workouts!</p>
+      )}
     </div>
   );
 }

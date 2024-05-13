@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const hashedPassword = await hash(password, 10);
     const response = await sql`
         INSERT into users(email, password, name)
-        VALUES (${email}, ${hashedPassword}, ${email})
+        VALUES (${email}, ${hashedPassword}, ${email.split("@")[0]})
     `;
   } catch (error) {
     console.log(error);
