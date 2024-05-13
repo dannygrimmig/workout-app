@@ -4,8 +4,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | The Logs",
-    default: "The Logs",
+    template: "%s | The Logs 🏋️",
+    default: "The Logs 🏋️",
   },
   description: "The Logs | Create, Share, and Track your workouts.",
   metadataBase: new URL("https://workout-app-one-self.vercel.app/"),
