@@ -1,8 +1,8 @@
 import { Suspense } from "react";
-import { CURRENT_USER } from "../lib/constants";
-import { fetchExercises, fetchUserWorkouts } from "../lib/data";
-import { Exercise, User, Workout } from "../lib/definitions";
-import { WorkoutCardContainer } from "../ui/History/WorkoutCardContainer";
+import { CURRENT_USER } from "../../lib/constants";
+import { fetchExercises, fetchUserWorkouts, getUser } from "../../lib/data";
+import { Exercise, User, Workout } from "../../lib/definitions";
+import { WorkoutCardContainer } from "../../ui/History/WorkoutCardContainer";
 
 import { Metadata } from "next";
 
@@ -24,7 +24,7 @@ export default function Page() {
 
 async function WorkoutGrid() {
   // imported
-  const user: User = CURRENT_USER; //temp
+  const user: User = await getUser(); //temp
   const workouts: Workout[] = await fetchUserWorkouts(user.id);
   const exercises: Exercise[] = await fetchExercises();
 
@@ -42,6 +42,10 @@ async function WorkoutGrid() {
           exercises={exercises}
         />
       ))}
+
+      {orderedWorkouts.length <= 0 && (
+        <p>No Workout History... add workouts!</p>
+      )}
     </div>
   );
 }
