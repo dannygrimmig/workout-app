@@ -61,7 +61,7 @@ export function Authentication() {
         <div className="flex justify-between">
           <h1 className="text-5xl">{actionText}</h1>
           <h2 className="text-5xl font-header text-slate-800 mb-2 sm:invisible">
-            The Logs 🏋️
+            The Logs
           </h2>
         </div>
 
