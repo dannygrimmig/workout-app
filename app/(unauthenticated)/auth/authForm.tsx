@@ -15,34 +15,43 @@ export function Authentication() {
   // Helpers
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const formData = new FormData(e.currentTarget);
 
-    const response = await fetch("../api/auth/register", {
-      method: "POST",
-      body: JSON.stringify({
-        email: formData.get("email"),
-        password: formData.get("password"),
-      }),
-    });
+    try {
+      await fetch("../api/auth/register", {
+        method: "POST",
+        body: JSON.stringify({
+          email: formData.get("email"),
+          password: formData.get("password"),
+        }),
+      });
+
+      // VALID REGISTRATION
+      window.location.reload();
+    } catch (error) {
+      // INVALID REGISTRATION
+      console.error("An error occurred during registration:", error);
+    }
   };
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Handle SignIn");
-
     const formData = new FormData(e.currentTarget);
+
+    // ATTEMPT SIGN IN
     const response = await signIn("credentials", {
       email: formData.get("email"),
       password: formData.get("password"),
       redirect: false,
     });
 
+    // VALID SIGN IN
     if (!response?.error) {
       router.push("/");
       router.refresh();
     }
 
+    // INVALID SIGN IN
     console.log(response);
   };
 
