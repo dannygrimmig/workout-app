@@ -11,10 +11,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: {},
-        password: {},
+        email: { type: "text" },
+        password: { type: "text" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
+        // Check if credentials exist and if they are strings
+        if (
+          typeof credentials?.email !== "string" ||
+          typeof credentials?.password !== "string"
+        ) {
+          throw new Error("Invalid credentials format.");
+        }
+
         const response = await sql`
             SELECT * from users
             WHERE email = ${credentials?.email}
