@@ -16,7 +16,7 @@ export function WorkoutExercise(props: WorkoutExerciseProps) {
   );
 
   return (
-    <div>
+    <div className="mb-2">
       <div className="flex gap-2">
         <p className="font-normal">{currentExercise?.name}</p>
       </div>

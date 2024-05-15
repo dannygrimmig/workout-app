@@ -1,6 +1,7 @@
 import { NewWorkout } from "../ui/Dashboard/NewWorkout";
 import { SignOutButton } from "../ui/Dashboard/signoutButton";
 import { fetchUserWorkouts, getUser } from "../lib/data";
+import Link from "next/link";
 
 export default async function Home() {
   const user = await getUser();
@@ -10,8 +11,7 @@ export default async function Home() {
   return (
     <main className="w-full min-h-[calc(100vh-74px)] grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 p-2 sm:p-8">
       <GridItem link="history" className="md:col-span-2 md:row-span-2">
-        <h1 className="font-bold">Workout Tracking App</h1>
-        <p>🚧 work in progress</p>
+        <h1 className="font-bold">Analytics</h1>
         <p>📈 data analytics to come here</p>
       </GridItem>
 
@@ -32,9 +32,12 @@ export default async function Home() {
 
             <div className="col-span-1">
               <div className="flex flex-col h-full items-center">
-                <div className="h-full w-full rounded-full border-2 border-black flex justify-center items-center">
-                  <p className="text-2xl font-normal">{workoutCount}</p>
-                </div>
+                <Link
+                  href={"/history"}
+                  className="h-full w-full bg-sky-600 hover:bg-sky-800 text-white rounded-full border-2 border-black flex justify-center items-center"
+                >
+                  <p className="text-2xl font-bold">{workoutCount}</p>
+                </Link>
                 <p>workouts</p>
               </div>
             </div>
