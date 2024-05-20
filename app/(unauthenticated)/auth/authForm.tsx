@@ -3,11 +3,13 @@
 import * as React from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Loading } from "@/app/ui/loading";
 
 export function Authentication() {
   const router = useRouter();
   // managed
   const [isLogIn, setIsLogIn] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   // derived
   const actionText = isLogIn ? "Log In" : "Sign Up";
@@ -15,6 +17,8 @@ export function Authentication() {
   // Helpers
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData(e.currentTarget);
 
     try {
@@ -36,6 +40,7 @@ export function Authentication() {
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(e.currentTarget);
 
     // ATTEMPT SIGN IN
@@ -117,6 +122,8 @@ export function Authentication() {
           <p>You are going to carry the boats, and THE LOGS</p>
         </div>
       </div>
+
+      {!!isLoading && <Loading />}
     </div>
   );
 }

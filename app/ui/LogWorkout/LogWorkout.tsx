@@ -12,6 +12,7 @@ import { CURRENT_USER } from "@/app/lib/constants";
 import { WorkoutDetails } from "./WorkoutDetails";
 import { WorkoutExerciseGrid } from "./WorkoutExerciseGrid";
 import { createWorkout } from "@/app/lib/actions";
+import { Loading } from "../loading";
 
 const WORKOUT_ID = 1;
 const EMPTY_WORKOUT = {
@@ -35,6 +36,8 @@ export function LogWorkout(props: LogWorkoutProps) {
   const { exercises, user } = props;
 
   // managed
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+
   const [workout, setWorkout] = React.useState<Workout>({
     ...EMPTY_WORKOUT,
     user_id: user.id,
@@ -141,10 +144,15 @@ export function LogWorkout(props: LogWorkoutProps) {
       <button
         type="button"
         className="bg-sky-200 hover:bg-sky-400 fixed bottom-4 right-4 p-2 shadow-[4px_4px] shadow-black border border-black"
-        onClick={() => createWorkout(workout, workoutExercises, sets)}
+        onClick={() => {
+          setIsLoading(true);
+          createWorkout(workout, workoutExercises, sets);
+        }}
       >
         Log it!
       </button>
+
+      {isLoading && <Loading />}
     </div>
   );
 }
