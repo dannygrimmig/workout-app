@@ -105,6 +105,8 @@ export async function fetchSets(workoutExerciseId: number) {
 }
 
 export async function fetchExercises() {
+  unstable_noStore();
+
   try {
     const data = await sql<Exercise>`SELECT * FROM exercises`;
 
