@@ -2,6 +2,7 @@ import { NewWorkout } from "../ui/Dashboard/NewWorkout";
 import { SignOutButton } from "../ui/Dashboard/signoutButton";
 import { fetchUserWorkouts, getUser } from "../lib/data";
 import Link from "next/link";
+import { HistoryGridItem } from "../ui/Dashboard/HistoryGridItem";
 
 export default async function Home() {
   const user = await getUser();
@@ -10,9 +11,12 @@ export default async function Home() {
 
   return (
     <main className="w-full min-h-[calc(100vh-74px)] grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 p-2 sm:p-8">
-      <GridItem link="history" className="md:col-span-2 md:row-span-2">
-        <h1 className="font-bold">Analytics</h1>
-        <p>📈 data analytics to come here</p>
+      <GridItem
+        link="history"
+        className="md:col-span-2 md:row-span-2 flex flex-col gap-2"
+      >
+        <h1 className="font-bold">Analytics 🚧</h1>
+        <HistoryGridItem />
       </GridItem>
 
       <GridItem link="add">
