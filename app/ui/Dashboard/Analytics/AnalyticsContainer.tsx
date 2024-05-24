@@ -2,8 +2,9 @@
 import * as React from "react";
 
 import { Range, RangeNav } from "./RangeNav";
-import { HeatMap } from "./HeatMap";
+import { HeatMap } from "../HeatMap/HeatMap";
 import { Chart, ChartNav } from "./ChartNav";
+import { Pie } from "../PieChart/PieChart";
 
 export function AnalyticsContainer() {
   const [selectedRange, setSelectedRange] = React.useState<Range>("week");
@@ -15,12 +16,7 @@ export function AnalyticsContainer() {
       chart = <HeatMap range={selectedRange} />;
       break;
     case "category":
-      chart = (
-        <div>
-          Pie Chart: will display distribution of workouts based on body part or
-          category
-        </div>
-      );
+      chart = <Pie range={selectedRange} />;
       break;
     case "growth":
     default:

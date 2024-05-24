@@ -2,7 +2,7 @@ import { NewWorkout } from "../ui/Dashboard/NewWorkout";
 import { SignOutButton } from "../ui/Dashboard/signoutButton";
 import { fetchUserWorkouts, getUser } from "../lib/data";
 import Link from "next/link";
-import { AnalyticsContainer } from "../ui/Dashboard/AnalyticsContainer";
+import { AnalyticsContainer } from "../ui/Dashboard/Analytics/AnalyticsContainer";
 
 export default async function Home() {
   const user = await getUser();

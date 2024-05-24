@@ -34,3 +34,6 @@ export type Exercise = {
   name: string;
   body_part: string;
 };
+
+export type BodyPart = "Chest" | "Legs" | "Core" | "Arms" | "Shoulders";
+export const bodypartArr = ["Chest", "Legs", "Core", "Arms", "Shoulders"];

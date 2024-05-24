@@ -3,7 +3,7 @@ import * as React from "react";
 
 import CalendarHeatmap from "react-calendar-heatmap";
 import { startOfWeek, subMonths, subYears } from "date-fns";
-import { Range } from "./RangeNav";
+import { Range } from "../Analytics/RangeNav";
 
 // sample data
 import { generateRandomWorkoutData } from "@/app/lib/testdata";
