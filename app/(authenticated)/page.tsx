@@ -2,7 +2,7 @@ import { NewWorkout } from "../ui/Dashboard/NewWorkout";
 import { SignOutButton } from "../ui/Dashboard/signoutButton";
 import { fetchUserWorkouts, getUser } from "../lib/data";
 import Link from "next/link";
-import { HeatMap } from "../ui/Dashboard/HeatMap";
+import { AnalyticsContainer } from "../ui/Dashboard/AnalyticsContainer";
 
 export default async function Home() {
   const user = await getUser();
@@ -14,7 +14,7 @@ export default async function Home() {
       <GridItem link="history" className="md:col-span-2 md:row-span-2">
         <h1 className="font-bold">Analytics 🚧</h1>
         {/* <p>📈 data analytics to come here</p> */}
-        <HeatMap />
+        <AnalyticsContainer />
       </GridItem>
 
       <GridItem link="add">
