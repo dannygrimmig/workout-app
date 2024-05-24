@@ -1,11 +1,10 @@
 "use client";
 import * as React from "react";
 
-export type Chart = "workouts" | "category" | "growth";
+export type Chart = "workouts" | "category";
 const chartOptions: { title: string; chart: Chart }[] = [
   { title: "workouts", chart: "workouts" },
   { title: "category", chart: "category" },
-  { title: "growth", chart: "growth" },
 ];
 
 export function ChartNav(props: {

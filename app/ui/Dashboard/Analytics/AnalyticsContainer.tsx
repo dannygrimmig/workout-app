@@ -16,16 +16,8 @@ export function AnalyticsContainer() {
       chart = <HeatMap range={selectedRange} />;
       break;
     case "category":
-      chart = <Pie range={selectedRange} />;
-      break;
-    case "growth":
     default:
-      chart = (
-        <div>
-          line / bar chart: will display overall growth / total of sets /
-          workouts completed to date
-        </div>
-      );
+      chart = <Pie range={selectedRange} />;
       break;
   }
 
