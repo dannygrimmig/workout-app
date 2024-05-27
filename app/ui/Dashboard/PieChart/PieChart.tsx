@@ -24,6 +24,8 @@ export function Pie(props: { range: Range }) {
 
   return (
     <div>
+      <p>🚧 random data right now 🚧</p>
+
       <PieChart
         series={[
           {

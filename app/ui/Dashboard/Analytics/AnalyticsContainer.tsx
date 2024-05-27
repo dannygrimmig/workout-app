@@ -5,10 +5,11 @@ import { Range, RangeNav } from "./RangeNav";
 import { HeatMap } from "../HeatMap/HeatMap";
 import { Chart, ChartNav } from "./ChartNav";
 import { Pie } from "../PieChart/PieChart";
+import { Line } from "../Line/Line";
 
 export function AnalyticsContainer() {
   const [selectedRange, setSelectedRange] = React.useState<Range>("week");
-  const [selectedChart, setSelectedChart] = React.useState<Chart>("category");
+  const [selectedChart, setSelectedChart] = React.useState<Chart>("progress");
 
   let chart;
   switch (selectedChart) {
@@ -16,8 +17,11 @@ export function AnalyticsContainer() {
       chart = <HeatMap range={selectedRange} />;
       break;
     case "category":
-    default:
       chart = <Pie range={selectedRange} />;
+      break;
+    case "progress":
+    default:
+      chart = <Line range={selectedRange} />;
       break;
   }
 

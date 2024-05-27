@@ -1,8 +1,9 @@
 "use client";
 import * as React from "react";
 
-export type Chart = "workouts" | "category";
+export type Chart = "workouts" | "category" | "progress";
 const chartOptions: { title: string; chart: Chart }[] = [
+  { title: "progress", chart: "progress" },
   { title: "category", chart: "category" },
   { title: "workouts", chart: "workouts" },
 ];
