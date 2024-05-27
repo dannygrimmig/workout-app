@@ -12,7 +12,7 @@ export const generateRandomWorkoutData = () => {
   let currentDate = new Date(oneYearAgo);
   while (currentDate <= today) {
     // Generate a random workout count for the day (between 0 and 5)
-    const workoutCount = Math.floor(Math.random() * 6);
+    const workoutCount = Math.floor(Math.random() * 5);
 
     // Format the date (YYYY-MM-DD)
     const date = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)

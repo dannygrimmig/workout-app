@@ -3,8 +3,8 @@ import * as React from "react";
 
 export type Chart = "workouts" | "category";
 const chartOptions: { title: string; chart: Chart }[] = [
-  { title: "workouts", chart: "workouts" },
   { title: "category", chart: "category" },
+  { title: "workouts", chart: "workouts" },
 ];
 
 export function ChartNav(props: {

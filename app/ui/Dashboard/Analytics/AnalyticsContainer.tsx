@@ -8,7 +8,7 @@ import { Pie } from "../PieChart/PieChart";
 
 export function AnalyticsContainer() {
   const [selectedRange, setSelectedRange] = React.useState<Range>("week");
-  const [selectedChart, setSelectedChart] = React.useState<Chart>("workouts");
+  const [selectedChart, setSelectedChart] = React.useState<Chart>("category");
 
   let chart;
   switch (selectedChart) {
@@ -22,19 +22,18 @@ export function AnalyticsContainer() {
   }
 
   return (
-    <div>
-      <div className="flex justify-between">
-        <RangeNav
-          activeTab={selectedRange}
-          onTabChange={(range) => setSelectedRange(range)}
-        />
-        <ChartNav
-          activeTab={selectedChart}
-          onTabChange={(chart) => setSelectedChart(chart)}
-        />
-      </div>
+    <div className="flex flex-col gap-2 justify-between h-full">
+      <ChartNav
+        activeTab={selectedChart}
+        onTabChange={(chart) => setSelectedChart(chart)}
+      />
 
       {chart}
+
+      <RangeNav
+        activeTab={selectedRange}
+        onTabChange={(range) => setSelectedRange(range)}
+      />
     </div>
   );
 }

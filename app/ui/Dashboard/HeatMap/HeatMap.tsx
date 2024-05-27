@@ -53,7 +53,8 @@ export function HeatMap(props: HeatMapProps) {
 
   return (
     <div className="heatmap-container">
-      <CalendarHeatmap
+      <p>🚧 work in progress</p>
+      {/* <CalendarHeatmap
         startDate={startDate}
         endDate={endDate}
         values={workoutData}
@@ -65,7 +66,7 @@ export function HeatMap(props: HeatMapProps) {
         }}
         showWeekdayLabels
         horizontal={range !== "week"}
-      />
+      /> */}
     </div>
   );
 }

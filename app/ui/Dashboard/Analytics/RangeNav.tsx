@@ -37,7 +37,9 @@ function TabButton(props: {
   const { title, isActive, onClick } = props;
   return (
     <button
-      className={`${isActive && "underline decoration-1 underline-offset-2"}`}
+      className={`px-3 py-1 rounded-lg ${
+        isActive ? "bg-sky-200" : "hover:bg-slate-200"
+      }`}
       onClick={onClick}
     >
       {title}
