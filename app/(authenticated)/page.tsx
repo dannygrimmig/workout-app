@@ -15,8 +15,10 @@ export default async function Home() {
         link="history"
         className="md:col-span-2 md:row-span-2 h-[60vh] sm:h-full"
       >
-        <h1 className="font-bold">Analytics 🚧</h1>
-        <AnalyticsContainer />
+        <div className="flex flex-col gap-2 h-full">
+          <h1 className="font-bold">Analytics 🚧</h1>
+          <AnalyticsContainer />
+        </div>
       </GridItem>
 
       <GridItem link="add">
@@ -65,7 +67,7 @@ function GridItem(props: GridItem) {
   const { link, className, children } = props;
   return (
     <div
-      className={`${className} p-8 shadow-[4px_4px] shadow-black border border-black h-auto`}
+      className={`${className} p-8 shadow-[4px_4px] shadow-black border border-black`}
     >
       {children}
     </div>

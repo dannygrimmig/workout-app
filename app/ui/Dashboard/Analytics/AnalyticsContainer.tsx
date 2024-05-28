@@ -32,7 +32,7 @@ export function AnalyticsContainer() {
         onTabChange={(chart) => setSelectedChart(chart)}
       />
 
-      {chart}
+      <div className="flex-1">{chart}</div>
 
       <RangeNav
         activeTab={selectedRange}

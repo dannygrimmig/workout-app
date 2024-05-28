@@ -23,23 +23,17 @@ export function Pie(props: { range: Range }) {
   };
 
   return (
-    <div>
-      <p>🚧 random data right now 🚧</p>
-
-      <PieChart
-        series={[
-          {
-            data: dataMap[range],
-            innerRadius: 25,
-            outerRadius: 100,
-            paddingAngle: 5,
-            cornerRadius: 5,
-          },
-        ]}
-        width={400}
-        height={200}
-      />
-    </div>
+    <PieChart
+      series={[
+        {
+          data: dataMap[range],
+          innerRadius: 25,
+          outerRadius: 100,
+          paddingAngle: 5,
+          cornerRadius: 5,
+        },
+      ]}
+    />
   );
 }
 
