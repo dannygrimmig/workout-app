@@ -10,7 +10,7 @@ export default async function Home() {
   const workoutCount = workouts.length;
 
   return (
-    <main className="w-full min-h-[calc(100vh-74px)] grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 p-2 sm:p-8">
+    <main className="w-full min-h-[calc(100vh-74px)] sm:grid grid-cols-1 grid-rows-3 md:grid-cols-3 md:grid-rows-2 gap-8 p-2 sm:p-8">
       <GridItem
         link="history"
         className="md:col-span-2 md:row-span-2 h-[60vh] sm:h-full"
@@ -67,7 +67,7 @@ function GridItem(props: GridItem) {
   const { link, className, children } = props;
   return (
     <div
-      className={`${className} p-8 shadow-[4px_4px] shadow-black border border-black`}
+      className={`${className} p-8 shadow-[4px_4px] shadow-black border border-black mb-4 sm:mb-0`}
     >
       {children}
     </div>
