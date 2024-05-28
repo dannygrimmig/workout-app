@@ -22,11 +22,11 @@ export default async function Home() {
       </GridItem>
 
       <GridItem link="add">
-        <div className="flex flex-col gap-2 h-full bg-orange-800">
+        <div className="flex flex-col gap-2 h-full">
           <h1 className="font-bold">Current User</h1>
 
-          <div className="grid grid-cols-2 h-full bg-orange-500">
-            <div className="col-span-1 flex flex-col justify-center items-center">
+          <div className="flex h-full gap-4">
+            <div className="flex-1 flex flex-col justify-center items-center">
               <p className="p-4 text-6xl underline underline-offset-2 decoration-1 ">
                 🏋️
               </p>
@@ -38,7 +38,7 @@ export default async function Home() {
 
             <Link
               href={"/history"}
-              className="bg-sky-600 hover:bg-sky-800 text-white col-span-1 flex flex-col shadow-[4px_4px] shadow-black border border-black items-center justify-center"
+              className="flex-1 bg-sky-600 hover:bg-sky-800 text-white flex flex-col shadow-[4px_4px] shadow-black border border-black items-center justify-center"
             >
               <p className="text-2xl font-bold">{workoutCount}</p>
               <p>workouts</p>
