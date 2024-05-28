@@ -36,16 +36,14 @@ export default async function Home() {
               </div>
             </div>
 
-            <div className="col-span-1">
-              <div className="flex flex-col h-full items-center">
-                <Link
-                  href={"/history"}
-                  className="h-full w-full bg-sky-600 hover:bg-sky-800 text-white rounded-full border-2 border-black flex justify-center items-center"
-                >
-                  <p className="text-2xl font-bold">{workoutCount}</p>
-                </Link>
-                <p>workouts</p>
-              </div>
+            <div className="col-span-1 flex flex-col h-full items-center">
+              <Link
+                href={"/history"}
+                className="h-full w-full bg-sky-600 hover:bg-sky-800 text-white rounded-full border-2 border-black flex justify-center items-center"
+              >
+                <p className="text-2xl font-bold">{workoutCount}</p>
+              </Link>
+              <p>workouts</p>
             </div>
           </div>
         </div>
