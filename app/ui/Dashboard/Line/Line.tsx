@@ -4,6 +4,7 @@ import * as React from "react";
 import { LineChart } from "@mui/x-charts";
 import { Range } from "../Analytics/RangeNav";
 import { getDateRange } from "@/app/lib/utils";
+import "./styles.css";
 
 export function Line(props: { range: Range }) {
   // imported
