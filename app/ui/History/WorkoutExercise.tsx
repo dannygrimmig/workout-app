@@ -25,8 +25,8 @@ export function WorkoutExercise(props: WorkoutExerciseProps) {
         <thead>
           <tr className="text-left">
             <th className="font-normal">set</th>
-            <th className="font-normal">reps</th>
             <th className="font-normal">weight</th>
+            <th className="font-normal">reps</th>
           </tr>
         </thead>
         <tbody>
@@ -36,8 +36,8 @@ export function WorkoutExercise(props: WorkoutExerciseProps) {
             return (
               <tr key={set.id} className={`${isGray && "bg-slate-200"}`}>
                 <td>{set.order_index}</td>
-                <td>{set.reps}</td>
                 <td>{set.weight}</td>
+                <td>{set.reps}</td>
               </tr>
             );
           })}

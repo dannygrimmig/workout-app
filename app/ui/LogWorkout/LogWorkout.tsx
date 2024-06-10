@@ -8,7 +8,6 @@ import {
   Workout,
   Workout_Exercise,
 } from "@/app/lib/definitions";
-import { CURRENT_USER } from "@/app/lib/constants";
 import { WorkoutDetails } from "./WorkoutDetails";
 import { WorkoutExerciseGrid } from "./WorkoutExerciseGrid";
 import { createWorkout } from "@/app/lib/actions";
@@ -20,7 +19,7 @@ const EMPTY_WORKOUT = {
   date: new Date(),
   notes: "",
   time: 0,
-  user_id: CURRENT_USER.id,
+  user_id: 0,
 };
 
 let WORKOUT_EXERCISE_ID_COUNT = 0;
