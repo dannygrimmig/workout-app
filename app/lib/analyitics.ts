@@ -4,6 +4,7 @@ import { sql } from "@vercel/postgres";
 import { unstable_noStore } from "next/cache";
 import { Range } from "../ui/Dashboard/Analytics/RangeNav";
 import { getDateRange } from "./utils";
+import { DateCount } from "../ui/Dashboard/Line/Line";
 
 async function fetchWorkoutCountOnDate(date: Date) {
   try {
@@ -40,23 +41,12 @@ async function fetchWorkoutCountOnDates(dates: Date[]) {
   return data;
 }
 
-export async function fetchWorkoutProgress(range: Range) {
+export async function fetchAnnualWorkoutCount() {
   unstable_noStore();
-
-  const dates = getDateRange(range);
-
+  const dates = getDateRange("year");
   try {
     const data = await fetchWorkoutCountOnDates(dates);
-    let sum = 0;
-    const toReturn = data.map((current) => {
-      sum += current.count;
-      return {
-        ...current,
-        count: sum,
-      };
-    });
-
-    return toReturn;
+    return data;
   } catch (error) {
     return [];
   }
