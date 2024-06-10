@@ -2,9 +2,7 @@
 
 import { sql } from "@vercel/postgres";
 import { unstable_noStore } from "next/cache";
-import { Range } from "../ui/Dashboard/Analytics/RangeNav";
 import { getDateRange } from "./utils";
-import { DateCount } from "../ui/Dashboard/Line/Line";
 
 async function fetchWorkoutCountOnDate(date: Date) {
   try {
@@ -13,7 +11,7 @@ async function fetchWorkoutCountOnDate(date: Date) {
         FROM workouts
         WHERE
             user_id = 28 AND
-            date = ${date}
+            date = ${date.toDateString()}
         `;
     return Number(response.rows[0].workout_count);
   } catch (error) {
