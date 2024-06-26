@@ -4,6 +4,8 @@ import * as React from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Loading } from "@/app/ui/loading";
+import goggins from "../../../public/goggins.png";
+import Image from "next/image";
 
 export function Authentication() {
   const router = useRouter();
@@ -114,12 +116,21 @@ export function Authentication() {
         </div>
       </div>
 
-      <div className="bg-gradient-to-br from-white to-slate-300 sm:col-span-6 lg:col-span-7 p-8 flex flex-col gap-8">
+      <div className="bg-gradient-to-br from-white to-slate-300 sm:col-span-6 lg:col-span-7 p-8 flex flex-col gap-4">
         <div>
           <h2 className="text-5xl font-header text-slate-800 mb-2">
             The Logs 🏋️
           </h2>
           <p>You are going to carry the boats, and THE LOGS</p>
+        </div>
+
+        <div className="h-screen sm:h-full w-full gap-4 relative">
+          <Image
+            src={goggins}
+            alt="goggins"
+            fill
+            className="rounded-xl object-cover"
+          />
         </div>
       </div>
 

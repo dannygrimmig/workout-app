@@ -2,7 +2,6 @@ import { sql } from "@vercel/postgres";
 import { unstable_noStore } from "next/cache";
 import { Exercise, Set, User, Workout, Workout_Exercise } from "./definitions";
 import { auth } from "@/auth";
-import email from "next-auth/providers/email";
 
 export async function getUser() {
   const session = await auth();

@@ -3,49 +3,49 @@ import * as React from "react";
 
 import { LineChart } from "@mui/x-charts";
 import { Range } from "../Analytics/RangeNav";
+import { fetchAnnualWorkoutCount } from "@/app/lib/analyitics";
 import { getDateRange } from "@/app/lib/utils";
 import "./styles.css";
 
-export function Line(props: { range: Range }) {
+export type DateCount = { date: Date; count: number };
+
+export function Line(props: { range: Range; userId: number }) {
   // imported
-  const { range } = props;
+  const { range, userId } = props;
 
   // managed
-  const [workoutData, setWorkoutData] = React.useState<
-    { date: Date; count: number }[]
-  >([]);
+  const [yearData, setYearData] = React.useState<DateCount[]>([]);
+  const [workoutData, setWorkoutData] = React.useState<DateCount[]>([]);
 
+  // 1 DB Call: Full Year
   React.useEffect(() => {
-    fetchData(range);
-  }, [range]);
+    async function fetchYearData() {
+      const response = await fetchAnnualWorkoutCount(userId);
+      setYearData(response);
+    }
+    fetchYearData();
+  }, [userId]);
 
-  const fetchData = async (range: Range) => {
-    const dates = getDateRange(range);
+  // Filter Year Data
+  React.useEffect(() => {
+    const dateRange = getDateRange(range);
+    const filtered = yearData.filter(
+      ({ date }) =>
+        date >= dateRange[0] && date <= dateRange[dateRange.length - 1]
+    );
 
-    // for api fetch
-    const startDate = dates[0];
-    const endDate = dates[dates.length - 1];
-
-    let prev = 0;
-    const data = dates.map((date) => {
-      const bool = Math.floor(Math.random() * 2);
-      const count = bool === 0 ? prev : prev + Math.floor(Math.random() * 10);
-      prev = count;
-
+    // Progress Sum
+    let sum = 0;
+    const toReturn = filtered.map((current) => {
+      sum += current.count;
       return {
-        date: date,
-        count: count,
+        ...current,
+        count: sum,
       };
     });
 
-    setWorkoutData(data);
-  };
-
-  // derived
-  const chartData = workoutData.map((item) => ({
-    x: item.date,
-    y: item.count,
-  }));
+    setWorkoutData(toReturn);
+  }, [range, yearData]);
 
   return (
     <LineChart
@@ -57,6 +57,7 @@ export function Line(props: { range: Range }) {
           showMark: false,
         },
       ]}
+      loading={workoutData.length <= 0}
     />
   );
 }

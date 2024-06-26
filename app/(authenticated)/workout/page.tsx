@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import { CURRENT_USER } from "../../lib/constants";
 import { fetchExercises, getUser } from "../../lib/data";
 import { Exercise, User } from "../../lib/definitions";
 import { LogWorkout } from "../../ui/LogWorkout/LogWorkout";
