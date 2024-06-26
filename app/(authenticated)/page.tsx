@@ -17,7 +17,7 @@ export default async function Home() {
       >
         <div className="flex flex-col gap-2 h-full">
           <h1 className="font-bold">Analytics 🚧</h1>
-          <AnalyticsContainer />
+          <AnalyticsContainer userId={user.id} />
         </div>
       </GridItem>
 

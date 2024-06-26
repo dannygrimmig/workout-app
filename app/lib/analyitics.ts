@@ -4,13 +4,13 @@ import { sql } from "@vercel/postgres";
 import { unstable_noStore } from "next/cache";
 import { getDateRange } from "./utils";
 
-async function fetchWorkoutCountOnDate(date: Date) {
+async function fetchWorkoutCountOnDate(date: Date, userId: number) {
   try {
     const response = await sql`
         SELECT COUNT(*) AS workout_count
         FROM workouts
         WHERE
-            user_id = 28 AND
+            user_id = ${userId} AND
             date = ${date.toDateString()}
         `;
     return Number(response.rows[0].workout_count);
@@ -19,10 +19,10 @@ async function fetchWorkoutCountOnDate(date: Date) {
   }
 }
 
-async function fetchWorkoutCountOnDates(dates: Date[]) {
+async function fetchWorkoutCountOnDates(dates: Date[], userId: number) {
   const promises = dates.map(async (date) => {
     try {
-      const count = await fetchWorkoutCountOnDate(date);
+      const count = await fetchWorkoutCountOnDate(date, userId);
       return {
         date: date,
         count: count,
@@ -39,11 +39,11 @@ async function fetchWorkoutCountOnDates(dates: Date[]) {
   return data;
 }
 
-export async function fetchAnnualWorkoutCount() {
+export async function fetchAnnualWorkoutCount(userId: number) {
   unstable_noStore();
   const dates = getDateRange("year");
   try {
-    const data = await fetchWorkoutCountOnDates(dates);
+    const data = await fetchWorkoutCountOnDates(dates, userId);
     return data;
   } catch (error) {
     return [];

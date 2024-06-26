@@ -7,7 +7,9 @@ import { Chart, ChartNav } from "./ChartNav";
 import { Pie } from "../PieChart/PieChart";
 import { Line } from "../Line/Line";
 
-export function AnalyticsContainer() {
+export function AnalyticsContainer(props: { userId: number }) {
+  const { userId } = props;
+
   const [selectedRange, setSelectedRange] = React.useState<Range>("week");
   const [selectedChart, setSelectedChart] = React.useState<Chart>("progress");
 
@@ -21,7 +23,7 @@ export function AnalyticsContainer() {
       break;
     case "progress":
     default:
-      chart = <Line range={selectedRange} />;
+      chart = <Line range={selectedRange} userId={userId} />;
       break;
   }
 

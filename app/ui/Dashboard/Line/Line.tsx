@@ -9,9 +9,9 @@ import "./styles.css";
 
 export type DateCount = { date: Date; count: number };
 
-export function Line(props: { range: Range }) {
+export function Line(props: { range: Range; userId: number }) {
   // imported
-  const { range } = props;
+  const { range, userId } = props;
 
   // managed
   const [yearData, setYearData] = React.useState<DateCount[]>([]);
@@ -20,11 +20,11 @@ export function Line(props: { range: Range }) {
   // 1 DB Call: Full Year
   React.useEffect(() => {
     async function fetchYearData() {
-      const response = await fetchAnnualWorkoutCount();
+      const response = await fetchAnnualWorkoutCount(userId);
       setYearData(response);
     }
     fetchYearData();
-  }, []);
+  }, [userId]);
 
   // Filter Year Data
   React.useEffect(() => {
