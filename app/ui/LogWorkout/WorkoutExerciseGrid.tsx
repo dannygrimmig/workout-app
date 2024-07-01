@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { Exercise, Set, Workout_Exercise } from "@/app/lib/definitions";
+import { SelectWorkout } from "./SelectWorkout";
 
 type WorkoutExerciseGridProps = {
   workoutExercises: Workout_Exercise[];
@@ -90,6 +91,10 @@ export function WorkoutExerciseCard(props: WorkoutExerciseCardProps) {
 
   // managed
   const [isOpen, setIsOpen] = React.useState<boolean>(true);
+  const [isSelectingWorkout, setIsSelectngWorkout] =
+    React.useState<boolean>(false);
+  const [exerciseName, setExerciseName] =
+    React.useState<string>("Select Exercise");
 
   const addSet = () => {
     const newSet = {
@@ -107,21 +112,27 @@ export function WorkoutExerciseCard(props: WorkoutExerciseCardProps) {
     <form className="p-4 shadow-[4px_4px] shadow-black border border-black flex flex-col h-max">
       {/* Select Exercise / Close Card */}
       <header className="flex justify-between">
-        <h2 className="font-bold text-lg">
-          <select
-            id="exercise"
-            name="exercise"
-            className="border-0 bg-transparent"
-            onChange={(e) => onExerciseSelect(Number(e.target.value))}
+        <div>
+          <p className="text-xs">Exercise</p>
+          <h2
+            className="font-bold cursor-pointer"
+            onClick={() => setIsSelectngWorkout(true)}
           >
-            <option value={0}>Select Workout</option>
-            {exercises?.map((exercise: Exercise) => (
-              <option key={exercise.id} value={exercise.id}>
-                {exercise.name}
-              </option>
-            ))}
-          </select>
-        </h2>
+            {exerciseName}
+          </h2>
+        </div>
+
+        {isSelectingWorkout && (
+          <SelectWorkout
+            isOpen={isSelectingWorkout}
+            onClose={() => setIsSelectngWorkout(false)}
+            exercises={exercises}
+            onSelectWorkout={(workout: Exercise, name: string) => {
+              onExerciseSelect(workout.id);
+              setExerciseName(name);
+            }}
+          />
+        )}
 
         <button type="button" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? "↑" : "↓"}
