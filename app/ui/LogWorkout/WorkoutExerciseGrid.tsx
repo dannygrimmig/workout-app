@@ -88,6 +88,9 @@ export function WorkoutExerciseCard(props: WorkoutExerciseCardProps) {
     handleUpdateSetReps,
   } = props;
 
+  // managed
+  const [isOpen, setIsOpen] = React.useState<boolean>(true);
+
   const addSet = () => {
     const newSet = {
       id: nextSetId,
@@ -101,8 +104,9 @@ export function WorkoutExerciseCard(props: WorkoutExerciseCardProps) {
   };
 
   return (
-    <form className="p-4 shadow-[4px_4px] shadow-black border border-black flex flex-col justify-between">
-      <div>
+    <form className="p-4 shadow-[4px_4px] shadow-black border border-black flex flex-col h-max">
+      {/* Select Exercise / Close Card */}
+      <header className="flex justify-between">
         <h2 className="font-bold text-lg">
           <select
             id="exercise"
@@ -119,7 +123,14 @@ export function WorkoutExerciseCard(props: WorkoutExerciseCardProps) {
           </select>
         </h2>
 
-        <table className="w-full table-fixed mb-2">
+        <button type="button" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? "↑" : "↓"}
+        </button>
+      </header>
+
+      {/* Card Contents */}
+      <div className={`${!isOpen ? "h-0 collapse" : "flex flex-col gap-2"}`}>
+        <table className={`w-full table-fixed`}>
           <thead>
             <tr className="text-left">
               <th className="font-normal">set</th>
@@ -143,15 +154,15 @@ export function WorkoutExerciseCard(props: WorkoutExerciseCardProps) {
             ))}
           </tbody>
         </table>
-      </div>
 
-      <button
-        onClick={addSet}
-        type="button"
-        className="bg-sky-600 hover:bg-sky-700 text-white shadow-[4px_4px] shadow-black border border-black p-1"
-      >
-        Add Set
-      </button>
+        <button
+          onClick={addSet}
+          type="button"
+          className="bg-sky-600 hover:bg-sky-700 text-white shadow-[4px_4px] shadow-black border border-black p-1 w-full"
+        >
+          Add Set
+        </button>
+      </div>
     </form>
   );
 }
