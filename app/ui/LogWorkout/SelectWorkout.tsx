@@ -24,7 +24,7 @@ export function SelectWorkout(props: SelectWorkoutProps) {
     return <></>;
   } else {
     return (
-      <div className="fixed top-0 left-0 w-full h-full z-50 flex p-8">
+      <div className="fixed top-0 left-0 w-full h-full z-50 flex p-2 sm:p-8">
         <div className="w-full h-full rounded bg-sky-800 p-8 shadow-[4px_4px] shadow-black border border-black overflow-scroll">
           <div className="flex flex-col gap-4">
             <div className="sticky top-0 flex items-center gap-2">
